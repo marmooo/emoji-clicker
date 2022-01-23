@@ -4,10 +4,10 @@ const scorePanel = document.getElementById("scorePanel");
 const ttsLang = getTTSLang();
 let answer = "Emoji Clicker";
 let firstRun = true;
-let problems = {};
+const problems = {};
 let correctCount = 0;
 let englishVoices = [];
-let endAudio, errorAudio, correctAudio;
+let endAudio, correctAudio;
 loadAudios();
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
@@ -37,8 +37,10 @@ function changeLang() {
 
 function getTTSLang() {
   switch (document.documentElement.lang) {
-    case "en": return "en-US";
-    case "ja": return "ja-JP";
+    case "en":
+      return "en-US";
+    case "ja":
+      return "ja-JP";
   }
 }
 
@@ -153,14 +155,15 @@ function nextProblem() {
   choices.forEach((choice, i) => {
     const text = p[i][1];
     const emojis = p[i][0];
-    choice.querySelector('.emoji').textContent = emojis[getRandomInt(0, emojis.length)];
-    choice.querySelector('.text').textContent = text;
+    choice.querySelector(".emoji").textContent =
+      emojis[getRandomInt(0, emojis.length)];
+    choice.querySelector(".text").textContent = text;
     if (i == pos) {
       answer = text;
       document.getElementById("answer").textContent = answer;
     }
     choice.onclick = () => {
-      const textObj = choice.querySelector('.text');
+      const textObj = choice.querySelector(".text");
       const choiceText = textObj.textContent;
       if (answer == choiceText) {
         playAudio(correctAudio);
@@ -186,15 +189,6 @@ function nextProblem() {
   }
 }
 
-function predict(canvas) {
-  const imageData = getImageData(canvas);
-  worker.postMessage({ imageData: imageData });
-}
-
-function catNyan() {
-  playAudio(errorAudio);
-}
-
 function catWalk(freq, emoji, text) {
   const area = document.getElementById("catsWalk");
   const width = area.offsetWidth;
@@ -207,8 +201,7 @@ function catWalk(freq, emoji, text) {
   canvas.style.top = getRandomInt(0, height - size) + "px";
   canvas.style.left = width - size + "px";
   canvas.addEventListener("click", function () {
-    const msg = speak(text);
-    // TODO:しゃべった後に消したほうが良い？
+    speak(text);
     this.remove();
   }, { once: true });
   area.appendChild(canvas);
@@ -329,7 +322,7 @@ function initVoices() {
   const choices = [...document.getElementById("choices").children];
   choices.forEach((choice) => {
     choice.onclick = () => {
-      const choiceText = choice.querySelector('.text').textContent;
+      const choiceText = choice.querySelector(".text").textContent;
       speak(choiceText);
     };
   });
