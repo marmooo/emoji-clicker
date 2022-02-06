@@ -334,13 +334,13 @@ function initProblems() {
     .then((response) => response.text())
     .then((tsv) => {
       let prevEn;
-      tsv.trim().split(/\n/).forEach((line) => {
+      tsv.trimEnd().split("\n").forEach((line) => {
         const [emoji, category, en, _] = line.split(",");
         if (category in problems === false) {
           problems[category] = [];
         }
         if (prevEn == en) {
-          problems[category].at(-1)[0].push(emoji);
+          problems[category].slice(-1)[0].push(emoji);
         } else {
           problems[category].push([[emoji], en]);
         }

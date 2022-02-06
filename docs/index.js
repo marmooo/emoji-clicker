@@ -26,7 +26,7 @@ function hideAllHints(){const choices=document.getElementById("choices");[...cho
 function changeMode(){if(this.textContent=="EASY"){this.textContent="HARD";hideAllHints();}else{this.textContent="EASY";showAllHints();}}
 function scoring(){playPanel.classList.add("d-none");scorePanel.classList.remove("d-none");document.getElementById("score").textContent=correctCount;}
 function initVoices(){const choices=[...document.getElementById("choices").children];choices.forEach((choice)=>{choice.onclick=()=>{const choiceText=choice.querySelector(".text").textContent;speak(choiceText);};});}
-function initProblems(){const lang=document.documentElement.lang;fetch(`/emoji-clicker/data/${lang}.csv`).then((response)=>response.text()).then((tsv)=>{let prevEn;tsv.trim().split(/\n/).forEach((line)=>{const[emoji,category,en,_]=line.split(",");if(category in problems===false){problems[category]=[];}
-if(prevEn==en){problems[category].at(-1)[0].push(emoji);}else{problems[category].push([[emoji],en]);}
+function initProblems(){const lang=document.documentElement.lang;fetch(`/emoji-clicker/data/${lang}.csv`).then((response)=>response.text()).then((tsv)=>{let prevEn;tsv.trimEnd().split("\n").forEach((line)=>{const[emoji,category,en,_]=line.split(",");if(category in problems===false){problems[category]=[];}
+if(prevEn==en){problems[category].slice(-1)[0].push(emoji);}else{problems[category].push([[emoji],en]);}
 prevEn=en;});});}
 initVoices();initProblems();catsWalk();document.getElementById("toggleDarkMode").onclick=toggleDarkMode;document.getElementById("restartButton").onclick=countdown;document.getElementById("startButton").onclick=countdown;document.getElementById("mode").onclick=changeMode;document.getElementById("voice").onclick=()=>{speak(answer);};document.getElementById("lang").onchange=changeLang;document.addEventListener("click",unlockAudio,{once:true,useCapture:true,});
