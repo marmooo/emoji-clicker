@@ -88,6 +88,21 @@
       <div id="noTTS" class="alert alert-warning text-center d-none">
         Your browser does not support text-to-speech, please use Chrome / Safari.
       </div>
+      <div id="infoPanel" class="row">
+        <div class="col-sm">
+          <p>Game English for kids. Click emoji corresponds to the voice!</p>
+        </div>
+        <div class="col-sm">
+          <div class="alert alert-info text-center">
+            <div class="h5">
+              <label>time:</label>
+              <span id="time" class="ms-1">60 / 60 sec</span>
+              <button id="mode" class="btn btn-secondary btn-sm ms-3">EASY</button>
+            </div>
+            <button id="startButton" class="btn btn-primary btn-lg m-1">START</button>
+          </div>
+        </div>
+      </div>
       <div id="gameStart" class="text-center d-none">
         <div id="countdown">
           <div id="counter">3</div>
@@ -104,59 +119,42 @@
         </div>
         <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">RESTART</button>
       </div>
-      <div id="playPanel">
-        <div id="infoPanel" class="row">
-          <div class="col-sm">
-            <p>Game English for kids. Click emoji corresponds to the voice!</p>
+      <div id="playPanel" class="text-center">
+        <div id="choices" class="d-flex flex-wrap justify-content-center">
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍩</div>
+            <div class="text">doughnut</div>
           </div>
-          <div class="col-sm">
-            <div class="alert alert-info text-center">
-              <div class="h5">
-                <label>time:</label>
-                <span id="time" class="ms-1">60 / 60 sec</span>
-                <button id="mode" class="btn btn-secondary btn-sm ms-3">EASY</button>
-              </div>
-              <button id="startButton" class="btn btn-primary btn-lg m-1">START</button>
-            </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍛</div>
+            <div class="text">curry rice</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍣</div>
+            <div class="text">sushi</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍡</div>
+            <div class="text">dango</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🥗</div>
+            <div class="text">salad</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍔</div>
+            <div class="text">hamburger</div>
           </div>
         </div>
-        <div id="playPanel" class="text-center">
-          <div id="choices" class="d-flex flex-wrap justify-content-center">
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍩</div>
-              <div class="text">doughnut</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍛</div>
-              <div class="text">curry rice</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍣</div>
-              <div class="text">sushi</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍡</div>
-              <div class="text">dango</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🥗</div>
-              <div class="text">salad</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍔</div>
-              <div class="text">hamburger</div>
-            </div>
+        <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm alert alert-primary h3">
+            <button id="voice" class="btn">🔊</button>
+            <span id="answer">Emoji Clicker</span>
           </div>
-          <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm alert alert-primary h3">
-              <button id="voice" class="btn">🔊</button>
-              <span id="answer">Emoji Clicker</span>
-            </div>
-            <div class="col-sm-2"></div>
-          </div>
-          <div id="catsWalk" class="pt-4 text-center">
-          </div>
+          <div class="col-sm-2"></div>
+        </div>
+        <div id="catsWalk" class="pt-4 text-center">
         </div>
       </div>
     </main>
