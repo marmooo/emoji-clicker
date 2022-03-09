@@ -141,12 +141,9 @@ function shuffle(array) {
   return array;
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 function nextProblem() {
-  const choices = [...document.getElementById("choices").children];
+  const root = document.getElementById("choices");
+  const choices = [...root.children];
   const course = document.getElementById("courseOption");
   const category = course.options[course.selectedIndex].value.toLowerCase();
   const p = problems[category].slice();
@@ -171,7 +168,11 @@ function nextProblem() {
         nextProblem();
       } else {
         textObj.style.visibility = "initial";
+        root.style.pointerEvents = "none";
         speak(choiceText);
+        setTimeout(() => {
+          root.style.pointerEvents = "auto";
+        }, 1000);
       }
     };
   });
@@ -183,9 +184,9 @@ function nextProblem() {
   if (firstRun) {
     speak(answer);
   } else {
-    sleep(500).then(() => {
+    setTimeout(() => {
       speak(answer);
-    });
+    }, 500);
   }
 }
 
