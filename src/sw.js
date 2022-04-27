@@ -1,4 +1,4 @@
-var CACHE_NAME = '2022-04-22 11:50';
+var CACHE_NAME = '2022-04-28 00:05';
 var urlsToCache = [
   "/emoji-clicker/",
   "/emoji-clicker/index.js",
@@ -8,7 +8,7 @@ var urlsToCache = [
   "/emoji-clicker/data/ja.csv",
   "/emoji-clicker/mp3/incorrect1.mp3",
   "/emoji-clicker/mp3/correct3.mp3",
-  "/emoji-clicker/favicon/favicon-48x48.png",
+  "/emoji-clicker/favicon/favicon.svg",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
 ];
 
