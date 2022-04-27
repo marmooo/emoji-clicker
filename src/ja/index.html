@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -95,6 +95,21 @@
         <pre><code>sudo apt install speech-dispatcher
 sudo apt install festival speech-dispatcher-festival</code></pre>
       </div>
+      <div id="infoPanel" class="row">
+        <div class="col-sm">
+          <p>ゲーム英語！音声に対応する絵文字をクリックしよう！</p>
+        </div>
+        <div class="col-sm">
+          <div class="alert alert-info text-center">
+            <div class="h5">
+              <label>time:</label>
+              <span id="time" class="ms-1">60 / 60 sec</span>
+              <button id="mode" class="btn btn-secondary btn-sm ms-3">EASY</button>
+            </div>
+            <button id="startButton" class="btn btn-primary btn-lg m-1">スタート</button>
+          </div>
+        </div>
+      </div>
       <div id="gameStart" class="text-center d-none">
         <div id="countdown">
           <div id="counter">3</div>
@@ -111,59 +126,42 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
         </div>
         <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">リスタート</button>
       </div>
-      <div id="playPanel">
-        <div id="infoPanel" class="row">
-          <div class="col-sm">
-            <p>ゲーム英語！音声に対応する絵文字をクリックしよう！</p>
+      <div id="playPanel" class="text-center">
+        <div id="choices" class="d-flex flex-wrap justify-content-center">
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍩</div>
+            <div class="text">ドーナッツ</div>
           </div>
-          <div class="col-sm">
-            <div class="alert alert-info text-center">
-              <div class="h5">
-                <label>time:</label>
-                <span id="time" class="ms-1">60 / 60 sec</span>
-                <button id="mode" class="btn btn-secondary btn-sm ms-3">EASY</button>
-              </div>
-              <button id="startButton" class="btn btn-primary btn-lg m-1">スタート</button>
-            </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍛</div>
+            <div class="text">カレーライス</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍣</div>
+            <div class="text">すし</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍡</div>
+            <div class="text">だんご</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🥗</div>
+            <div class="text">サラダ</div>
+          </div>
+          <div role="button" class="card bg-light">
+            <div class="emoji">🍔</div>
+            <div class="text">ハンバーガー</div>
           </div>
         </div>
-        <div id="playPanel" class="text-center">
-          <div id="choices" class="d-flex flex-wrap justify-content-center">
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍩</div>
-              <div class="text">ドーナッツ</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍛</div>
-              <div class="text">カレーライス</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍣</div>
-              <div class="text">すし</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍡</div>
-              <div class="text">だんご</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🥗</div>
-              <div class="text">サラダ</div>
-            </div>
-            <div role="button" class="card bg-light">
-              <div class="emoji">🍔</div>
-              <div class="text">ハンバーガー</div>
-            </div>
+        <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm alert alert-primary h3">
+            <button id="voice" class="btn">🔊</button>
+            <span id="answer">Emoji Clicker</span>
           </div>
-          <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm alert alert-primary h3">
-              <button id="voice" class="btn">🔊</button>
-              <span id="answer">Emoji Clicker</span>
-            </div>
-            <div class="col-sm-2"></div>
-          </div>
-          <div id="catsWalk" class="pt-4 text-center">
-          </div>
+          <div class="col-sm-2"></div>
+        </div>
+        <div id="catsWalk" class="pt-4 text-center">
         </div>
       </div>
     </main>
