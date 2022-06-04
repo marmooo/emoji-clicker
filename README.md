@@ -1,6 +1,6 @@
 # Emoji Clicker
 
-Game English for kids. Click emoji corresponds to the voice!
+Game English/Japanese for kids. Click emoji corresponds to the voice!
 
 ## Build
 
