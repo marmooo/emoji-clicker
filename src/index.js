@@ -6,6 +6,7 @@ const gameTime = 60;
 const categories = [...document.getElementById("courseOption").options].map(
   (x) => x.value.toLowerCase(),
 );
+const originalLang = document.documentElement.lang;
 const ttsLang = getTTSLang();
 let answer = "Emoji Clicker";
 let firstRun = true;
@@ -22,6 +23,13 @@ function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
     document.documentElement.dataset.theme = "dark";
   }
+  if (originalLang == "ja") {
+    if (localStorage.getItem("furigana") == 1) {
+      const obj = document.getElementById("addFurigana");
+      addFurigana(obj);
+      obj.setAttribute("data-done", true);
+    }
+  }
 }
 
 function toggleDarkMode() {
@@ -34,6 +42,21 @@ function toggleDarkMode() {
   }
 }
 
+function addFurigana() {
+  if (originalLang != "ja") return;
+  const obj = document.getElementById("addFurigana");
+  if (obj.getAttribute("data-done")) {
+    localStorage.setItem("furigana", 0);
+    location.reload();
+  } else {
+    import("https://marmooo.github.io/yomico/yomico.min.js").then((module) => {
+      module.yomico("/emoji-clicker/ja/index.yomi");
+    });
+    localStorage.setItem("furigana", 1);
+    obj.setAttribute("data-done", true);
+  }
+}
+
 function changeLang() {
   const langObj = document.getElementById("lang");
   const lang = langObj.options[langObj.selectedIndex].value;
@@ -41,7 +64,7 @@ function changeLang() {
 }
 
 function getTTSLang() {
-  switch (document.documentElement.lang) {
+  switch (originalLang) {
     case "en":
       return "en-US";
     case "ja":
@@ -339,8 +362,7 @@ function initVoices() {
 }
 
 function initProblems() {
-  const lang = document.documentElement.lang;
-  fetch(`/emoji-clicker/data/${lang}.csv`)
+  fetch(`/emoji-clicker/data/${originalLang}.csv`)
     .then((response) => response.text())
     .then((tsv) => {
       let prevEn;
@@ -366,6 +388,8 @@ initProblems();
 catsWalk();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
+const furiganaButton = document.getElementById("addFurigana");
+if (furiganaButton) furiganaButton.onclick = addFurigana;
 document.getElementById("restartButton").onclick = countdown;
 document.getElementById("startButton").onclick = countdown;
 document.getElementById("mode").onclick = changeMode;
