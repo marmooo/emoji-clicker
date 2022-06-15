@@ -55,7 +55,7 @@
     <script data-ad-client="ca-pub-6459713332128733" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <body>
-    <header id="header">
+    <header>
       <nav class="navbar navbar-expand navbar-light">
         <div class="container flex-wrap">
           <a class="navbar-brand" href="/emoji-clicker/">
@@ -96,37 +96,25 @@
 sudo apt install festival speech-dispatcher-festival</code></pre>
       </div>
       <div id="infoPanel" class="row">
-        <div class="col-sm">
+        <div class="col-md">
           <p>Game English for kids. Click emoji corresponds to the voice!</p>
         </div>
-        <div class="col-sm">
-          <div class="alert alert-info text-center">
-            <div class="h5">
-              <label>time:</label>
-              <span id="time" class="ms-1">60 / 60 sec</span>
-              <button id="mode" class="btn btn-secondary btn-sm ms-3">EASY</button>
+        <div id="timePanel" class="col-md text-center">
+          <div class="alert alert-info">
+            <div class="d-flex flex-wrap justify-content-center">
+              <div class="h5 text-nowrap me-4 notranslate">
+                <span id="time">60</span>
+                <span> / 60 sec</span>
+              </div>
+              <button id="mode" class="btn btn-sm btn-secondary notranslate">EASY</button>
             </div>
-            <button id="startButton" class="btn btn-primary btn-lg m-1">START</button>
+            <div class="mt-2">
+              <button id="startButton" class="btn btn-primary btn-lg">START</button>
+            </div>
           </div>
         </div>
       </div>
-      <div id="gameStart" class="text-center d-none">
-        <div id="countdown">
-          <div id="counter">3</div>
-          <span id="counter-emoji" class="emoji pt-3">🍢</span>
-        </div>
-      </div>
-      <div id="scorePanel" class="text-center pb-3 d-none">
-        <h3 class="pt-3">Score</h3>
-        <span id="score-emoji" class="emoji pt-3">🍙</span>
-        <p>You have clicked correctly ...</p>
-        <div class="h2 pb-3">
-          <span id="score" class="h1">0</span>
-          emoji!
-        </div>
-        <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">RESTART</button>
-      </div>
-      <div id="playPanel" class="text-center">
+      <div id="playPanel" class="text-center notranslate">
         <div id="choices" class="d-flex flex-wrap justify-content-center">
           <div role="button" class="card bg-light">
             <div class="emoji">🍩</div>
@@ -164,16 +152,31 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
         <div id="catsWalk" class="pt-4 text-center">
         </div>
       </div>
+      <div id="countPanel" class="text-center d-none notranslate">
+        <div id="countdown">
+          <div id="counter">3</div>
+          <span id="counter-emoji" class="emoji pt-3">🍢</span>
+        </div>
+      </div>
+      <div id="scorePanel" class="text-center pb-3 d-none">
+        <h3 class="pt-3">Score</h3>
+        <span id="score-emoji" class="emoji pt-3 notranslate">🍙</span>
+        <p>You have clicked correctly ...</p>
+        <div class="h2 pb-3">
+          <span id="score" class="h1 notranslate">0</span>
+        </div>
+        <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">RESTART</button>
+      </div>
     </main>
     <footer class="pt-4 alert text-center">
       <div class="table-responsive">
         <label>Supporting Status (2022):</label>
         <table class="table table-sm table-striped w-auto m-auto text-nowrap">
-          <tr><td>◎</td><td>Android</td><td>fully supported</td></tr>
-          <tr><td>◎</td><td>iOS / Mac</td><td>fully supported</td></tr>
-          <tr><td>◎</td><td>Windows 11</td><td>fully supported</td></tr>
-          <tr><td>○</td><td>Linux</td><td>fully supported (but required emoji fonts)</td></tr>
-          <tr><td>△</td><td>Windows 10</td><td>some emojis are broken (ZWJ is not supported)</td></tr>
+          <tr><td>⭕</td><td class="notranslate">Android</td><td>fully supported</td></tr>
+          <tr><td>⭕</td><td class="notranslate">iOS / Mac</td><td>fully supported</td></tr>
+          <tr><td>⭕</td><td class="notranslate">Windows 11</td><td>fully supported</td></tr>
+          <tr><td>⭕</td><td class="notranslate">Linux</td><td>fully supported (but required emoji fonts)</td></tr>
+          <tr><td>⚠</td><td class="notranslate">Windows 10</td><td>some emojis are broken (ZWJ problem)</td></tr>
         </table>
       </div>
       <div class="pt-3">

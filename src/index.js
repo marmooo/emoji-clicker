@@ -1,7 +1,11 @@
-const gameStart = document.getElementById("gameStart");
+const countPanel = document.getElementById("countPanel");
 const infoPanel = document.getElementById("infoPanel");
 const playPanel = document.getElementById("playPanel");
 const scorePanel = document.getElementById("scorePanel");
+const gameTime = 60;
+const categories = [...document.getElementById("courseOption").options].map(
+  (x) => x.value.toLowerCase(),
+);
 const ttsLang = getTTSLang();
 let answer = "Emoji Clicker";
 let firstRun = true;
@@ -93,13 +97,13 @@ function loadAudios() {
 
 function loadVoices() {
   // https://stackoverflow.com/questions/21513706/
-  const allVoicesObtained = new Promise(function (resolve) {
+  const allVoicesObtained = new Promise((resolve) => {
     let voices = speechSynthesis.getVoices();
     if (voices.length !== 0) {
       resolve(voices);
     } else {
       let supported = false;
-      speechSynthesis.addEventListener("voiceschanged", function () {
+      speechSynthesis.addEventListener("voiceschanged", () => {
         supported = true;
         voices = speechSynthesis.getVoices();
         resolve(voices);
@@ -146,7 +150,7 @@ function nextProblem() {
   const root = document.getElementById("choices");
   const choices = [...root.children];
   const course = document.getElementById("courseOption");
-  const category = course.options[course.selectedIndex].value.toLowerCase();
+  const category = categories[course.selectedIndex];
   const p = problems[category].slice();
   shuffle(p);
   const pos = getRandomInt(0, choices.length);
@@ -202,12 +206,12 @@ function catWalk(freq, emoji, text) {
   const size = 128;
   canvas.style.top = getRandomInt(0, height - size) + "px";
   canvas.style.left = width - size + "px";
-  canvas.addEventListener("click", function () {
+  canvas.addEventListener("click", () => {
     speak(text);
-    this.remove();
+    canvas.remove();
   }, { once: true });
   area.appendChild(canvas);
-  const timer = setInterval(function () {
+  const timer = setInterval(() => {
     const x = parseInt(canvas.style.left) - 1;
     if (x > -size) {
       canvas.style.left = x + "px";
@@ -219,7 +223,7 @@ function catWalk(freq, emoji, text) {
 }
 
 function catsWalk() {
-  setInterval(function () {
+  setInterval(() => {
     if (Math.random() > 0.995) {
       const [emoji, text] = selectRandomEmoji();
       catWalk(getRandomInt(5, 20), emoji, text);
@@ -231,12 +235,11 @@ let gameTimer;
 function startGameTimer() {
   clearInterval(gameTimer);
   const timeNode = document.getElementById("time");
-  timeNode.textContent = "60秒 / 60秒";
-  gameTimer = setInterval(function () {
-    const arr = timeNode.textContent.split("秒 /");
-    const t = parseInt(arr[0]);
+  initTime();
+  gameTimer = setInterval(() => {
+    const t = parseInt(timeNode.textContent);
     if (t > 0) {
-      timeNode.textContent = (t - 1) + "秒 /" + arr[1];
+      timeNode.textContent = t - 1;
     } else {
       clearInterval(gameTimer);
       playAudio(endAudio);
@@ -245,8 +248,11 @@ function startGameTimer() {
   }, 1000);
 }
 
+function initTime() {
+  document.getElementById("time").textContent = gameTime;
+}
+
 function selectRandomEmoji() {
-  const categories = Object.keys(problems);
   const category = categories[getRandomInt(0, categories.length)];
   const p = problems[category];
   const problem = p[getRandomInt(0, p.length)];
@@ -266,13 +272,13 @@ function countdown() {
   firstRun = false;
   clearTimeout(countdownTimer);
   changeUIEmoji();
-  gameStart.classList.remove("d-none");
+  countPanel.classList.remove("d-none");
   infoPanel.classList.add("d-none");
   playPanel.classList.add("d-none");
   scorePanel.classList.add("d-none");
   const counter = document.getElementById("counter");
   counter.textContent = 3;
-  countdownTimer = setInterval(function () {
+  countdownTimer = setInterval(() => {
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
     if (parseInt(counter.textContent) > 1) {
       const t = parseInt(counter.textContent) - 1;
@@ -281,7 +287,7 @@ function countdown() {
     } else {
       firstRun = false;
       clearTimeout(countdownTimer);
-      gameStart.classList.add("d-none");
+      countPanel.classList.add("d-none");
       infoPanel.classList.remove("d-none");
       playPanel.classList.remove("d-none");
       document.getElementById("score").textContent = 0;
@@ -344,8 +350,8 @@ function initProblems() {
           problems[category] = [];
         }
         if (prevEn == en) {
-          const categories = problems[category];
-          const last = categories[categories.length - 1];
+          const p = problems[category];
+          const last = p[p.length - 1];
           last[0].push(emoji);
         } else {
           problems[category].push([[emoji], en]);
