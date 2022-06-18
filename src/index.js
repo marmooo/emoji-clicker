@@ -13,6 +13,7 @@ let firstRun = true;
 const problems = {};
 let correctCount = 0;
 let englishVoices = [];
+loadVoices();
 let endAudio, correctAudio;
 loadAudios();
 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -142,7 +143,6 @@ function loadVoices() {
     englishVoices = voices.filter((voice) => voice.lang == ttsLang);
   });
 }
-loadVoices();
 
 function speak(text) {
   speechSynthesis.cancel();
