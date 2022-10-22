@@ -1,8 +1,7 @@
-var CACHE_NAME = "2022-10-08 11:03";
+var CACHE_NAME = "2022-10-22 20:50";
 var urlsToCache = [
   "/emoji-clicker/",
   "/emoji-clicker/index.js",
-  "/emoji-clicker/en/",
   "/emoji-clicker/data/en.csv",
   "/emoji-clicker/mp3/incorrect1.mp3",
   "/emoji-clicker/mp3/correct3.mp3",
