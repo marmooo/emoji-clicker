@@ -16,8 +16,8 @@ let englishVoices = [];
 loadVoices();
 const audioContext = new AudioContext();
 const audioBufferCache = {};
-loadAudio("end", "mp3/end.mp3");
-loadAudio("correct", "mp3/correct3.mp3");
+loadAudio("end", "/emoji-clicker/mp3/end.mp3");
+loadAudio("correct", "/emoji-clicker/mp3/correct3.mp3");
 loadConfig();
 
 function loadConfig() {
