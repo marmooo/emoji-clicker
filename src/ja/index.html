@@ -41,20 +41,29 @@
         background:tomato; margin:auto; }
       #catsWalk { height:30vh; text-align:center; position:relative; }
       .emoji { font-size:5rem; }
-      .card { width:150px; margin:0.5rem; padding:1rem; }
+      .emoji-card { width:150px; margin:0.5rem; padding:1rem; }
       @media (max-width: 768px) {
         .emoji { font-size:3rem; }
-        .card { width:100px; margin:0.25rem; padding:0.5rem; }
+        .emoji-card { width:100px; margin:0.25rem; padding:0.5rem; }
       }
-      td { padding: 0.25rem !important; }
-      html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg) brightness(1.5); }
-      @-moz-document url-prefix() { html[data-theme="dark"] { background-color:black; } }
+      html[data-bs-theme="dark"] .navbar-brand > img { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] .btn-light {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: var(--bs-gray-800);
+        --bs-btn-border-color: var(--bs-gray-800);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: var(--bs-gray-700);
+        --bs-btn-hover-border-color: var(--bs-gray-600);
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: var(--bs-gray-600);
+        --bs-btn-active-border-color: var(--bs-gray-500);
+      }
     </style>
     <script data-ad-client="ca-pub-6459713332128733" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand navbar-light">
+      <nav class="navbar navbar-expand">
         <div class="container flex-wrap">
           <a class="navbar-brand" href="/emoji-clicker/">
             <img alt="えもじクリッカー" src="/emoji-clicker/favicon/favicon.svg" width="32" height="32">
@@ -115,27 +124,27 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
       </div>
       <div id="playPanel" class="text-center notranslate">
         <div id="choices" class="d-flex flex-wrap justify-content-center">
-          <div role="button" class="card bg-light">
+          <div role="button" class="emoji-card btn btn-light border">
             <div class="emoji">🍩</div>
             <div class="text">ドーナッツ</div>
           </div>
-          <div role="button" class="card bg-light">
+          <div role="button" class="emoji-card btn btn-light border">
             <div class="emoji">🍛</div>
             <div class="text">カレーライス</div>
           </div>
-          <div role="button" class="card bg-light">
+          <div role="button" class="emoji-card btn btn-light border">
             <div class="emoji">🍣</div>
             <div class="text">すし</div>
           </div>
-          <div role="button" class="card bg-light">
+          <div role="button" class="emoji-card btn btn-light border">
             <div class="emoji">🍡</div>
             <div class="text">だんご</div>
           </div>
-          <div role="button" class="card bg-light">
+          <div role="button" class="emoji-card btn btn-light border">
             <div class="emoji">🥗</div>
             <div class="text">サラダ</div>
           </div>
-          <div role="button" class="card bg-light">
+          <div role="button" class="emoji-card btn btn-light border">
             <div class="emoji">🍔</div>
             <div class="text">ハンバーガー</div>
           </div>
