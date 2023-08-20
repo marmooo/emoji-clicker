@@ -6,7 +6,7 @@ const gameTime = 60;
 const categories = [...document.getElementById("courseOption").options].map(
   (x) => x.value.toLowerCase(),
 );
-const originalLang = document.documentElement.lang;
+const htmlLang = document.documentElement.lang;
 const ttsLang = getTTSLang();
 let answer = "Emoji Clicker";
 let firstRun = true;
@@ -24,7 +24,7 @@ function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
     document.documentElement.setAttribute("data-bs-theme", "dark");
   }
-  if (originalLang == "ja") {
+  if (htmlLang == "ja") {
     if (localStorage.getItem("furigana") == 1) {
       const obj = document.getElementById("addFurigana");
       addFurigana(obj);
@@ -44,7 +44,7 @@ function toggleDarkMode() {
 }
 
 function addFurigana() {
-  if (originalLang != "ja") return;
+  if (htmlLang != "ja") return;
   const obj = document.getElementById("addFurigana");
   if (obj.getAttribute("data-done")) {
     localStorage.setItem("furigana", 0);
@@ -65,7 +65,7 @@ function changeLang() {
 }
 
 function getTTSLang() {
-  switch (originalLang) {
+  switch (htmlLang) {
     case "en":
       return "en-US";
     case "ja":
@@ -376,7 +376,7 @@ function initVoices() {
 }
 
 function initProblems() {
-  fetch(`/emoji-clicker/data/${originalLang}.csv`)
+  fetch(`/emoji-clicker/data/${htmlLang}.csv`)
     .then((response) => response.text())
     .then((tsv) => {
       let prevEn;
