@@ -204,7 +204,7 @@ function nextProblem() {
       const textObj = choice.querySelector(".text");
       const choiceText = textObj.textContent;
       if (answer == choiceText) {
-        playAudio("correct");
+        playAudio("correct", 0.3);
         correctCount += 1;
         nextProblem();
       } else {
