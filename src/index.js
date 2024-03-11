@@ -14,7 +14,7 @@ const problems = {};
 let correctCount = 0;
 let englishVoices = [];
 loadVoices();
-const audioContext = new AudioContext();
+const audioContext = new globalThis.AudioContext();
 const audioBufferCache = {};
 loadAudio("end", "/emoji-clicker/mp3/end.mp3");
 loadAudio("correct", "/emoji-clicker/mp3/correct3.mp3");
@@ -161,7 +161,7 @@ function loadVoices() {
 
 function speak(text) {
   speechSynthesis.cancel();
-  const msg = new SpeechSynthesisUtterance(text);
+  const msg = new globalThis.SpeechSynthesisUtterance(text);
   msg.voice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
   msg.lang = ttsLang;
   speechSynthesis.speak(msg);
