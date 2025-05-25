@@ -7,7 +7,7 @@ const categories = [...document.getElementById("courseOption").options].map(
   (x) => x.value.toLowerCase(),
 );
 const htmlLang = document.documentElement.lang;
-const ttsLang = getTTSLang();
+const ttsLang = getTTSLang(htmlLang);
 let answer = "Emoji Clicker";
 let firstRun = true;
 const problems = {};
@@ -62,7 +62,7 @@ function changeLang() {
   location.href = `/emoji-clicker/${lang}/`;
 }
 
-function getTTSLang() {
+function getTTSLang(htmlLang) {
   switch (htmlLang) {
     case "en":
       return "en-US";
@@ -81,6 +81,10 @@ function createAudioContext() {
 }
 
 function unlockAudio() {
+  const uttr = new SpeechSynthesisUtterance("");
+  uttr.lang = ttsLang;
+  speechSynthesis.speak(uttr);
+
   if (audioContext) {
     audioContext.resume();
   } else {
@@ -88,7 +92,7 @@ function unlockAudio() {
     loadAudio("end", "/emoji-clicker/mp3/end.mp3");
     loadAudio("correct", "/emoji-clicker/mp3/correct3.mp3");
   }
-  document.removeEventListener("pointerdown", unlockAudio);
+  document.removeEventListener("click", unlockAudio);
   document.removeEventListener("keydown", unlockAudio);
 }
 
@@ -432,5 +436,5 @@ document.getElementById("voice").onclick = () => {
   speak(answer);
 };
 document.getElementById("lang").onchange = changeLang;
-document.addEventListener("pointerdown", unlockAudio, { once: true });
+document.addEventListener("click", unlockAudio, { once: true });
 document.addEventListener("keydown", unlockAudio, { once: true });
