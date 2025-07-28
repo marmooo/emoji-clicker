@@ -81,10 +81,6 @@ function createAudioContext() {
 }
 
 function unlockAudio() {
-  const uttr = new SpeechSynthesisUtterance("");
-  uttr.lang = ttsLang;
-  speechSynthesis.speak(uttr);
-
   if (audioContext) {
     audioContext.resume();
   } else {
@@ -331,6 +327,7 @@ function changeUIEmoji() {
 
 let countdownTimer;
 function countdown() {
+  speak("Ready"); // unlock
   firstRun = false;
   clearTimeout(countdownTimer);
   changeUIEmoji();
