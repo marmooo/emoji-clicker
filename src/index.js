@@ -397,30 +397,28 @@ function initVoices() {
   });
 }
 
-function initProblems() {
-  fetch(`/emoji-clicker/data/${htmlLang}.csv`)
-    .then((response) => response.text())
-    .then((tsv) => {
-      let prevEn;
-      tsv.trimEnd().split("\n").forEach((line) => {
-        const [emoji, category, en, _] = line.split(",");
-        if (category in problems === false) {
-          problems[category] = [];
-        }
-        if (prevEn == en) {
-          const p = problems[category];
-          const last = p[p.length - 1];
-          last[0].push(emoji);
-        } else {
-          problems[category].push([[emoji], en]);
-        }
-        prevEn = en;
-      });
-    });
+async function initProblems() {
+  const response = await fetch(`/emoji-clicker/data/${htmlLang}.csv`);
+  const tsv = await response.text();
+  let prevEn;
+  tsv.trimEnd().split("\n").forEach((line) => {
+    const [emoji, category, en, _] = line.split(",");
+    if (category in problems === false) {
+      problems[category] = [];
+    }
+    if (prevEn == en) {
+      const p = problems[category];
+      const last = p[p.length - 1];
+      last[0].push(emoji);
+    } else {
+      problems[category].push([[emoji], en]);
+    }
+    prevEn = en;
+  });
 }
 
 initVoices();
-initProblems();
+await initProblems();
 catsWalk();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
