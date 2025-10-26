@@ -1,3 +1,5 @@
+import { createWorker } from "https://cdn.jsdelivr.net/npm/emoji-particle@0.0.4/+esm";
+
 const countPanel = document.getElementById("countPanel");
 const infoPanel = document.getElementById("infoPanel");
 const playPanel = document.getElementById("playPanel");
@@ -8,9 +10,12 @@ const categories = [...document.getElementById("courseOption").options].map(
 );
 const htmlLang = document.documentElement.lang;
 const ttsLang = getTTSLang(htmlLang);
+const emojiParticle = initEmojiParticle();
+const maxParticleCount = 10;
 let answer = "Emoji Clicker";
 let firstRun = true;
 const problems = {};
+let consecutiveWins = 0;
 let correctCount = 0;
 let englishVoices = [];
 loadVoices();
@@ -189,6 +194,30 @@ function speak(text) {
   return msg;
 }
 
+function initEmojiParticle() {
+  const canvas = document.createElement("canvas");
+  Object.assign(canvas.style, {
+    position: "fixed",
+    pointerEvents: "none",
+    top: "0px",
+    left: "0px",
+  });
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
+  document.body.prepend(canvas);
+
+  const offscreen = canvas.transferControlToOffscreen();
+  const worker = createWorker();
+  worker.postMessage({ type: "init", canvas: offscreen }, [offscreen]);
+
+  globalThis.addEventListener("resize", () => {
+    const width = document.documentElement.clientWidth;
+    const height = document.documentElement.clientHeight;
+    worker.postMessage({ type: "resize", width, height });
+  });
+  return { canvas, offscreen, worker };
+}
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -204,6 +233,16 @@ function shuffle(array) {
 }
 
 function nextProblem() {
+  for (let i = 0; i < Math.min(consecutiveWins, maxParticleCount); i++) {
+    emojiParticle.worker.postMessage({
+      type: "spawn",
+      options: {
+        particleType: "popcorn",
+        originX: Math.random() * emojiParticle.canvas.width,
+        originY: Math.random() * emojiParticle.canvas.height,
+      },
+    });
+  }
   const root = document.getElementById("choices");
   const choices = [...root.children];
   const course = document.getElementById("courseOption");
@@ -227,8 +266,10 @@ function nextProblem() {
       if (answer == choiceText) {
         playAudio("correct", 0.3);
         correctCount += 1;
+        consecutiveWins += 1;
         nextProblem();
       } else {
+        consecutiveWins = 0;
         textObj.style.visibility = "initial";
         root.style.pointerEvents = "none";
         speak(choiceText);
@@ -349,8 +390,8 @@ function countdown() {
       countPanel.classList.add("d-none");
       infoPanel.classList.remove("d-none");
       playPanel.classList.remove("d-none");
-      document.getElementById("score").textContent = 0;
       correctCount = 0;
+      consecutiveWins = 0;
       nextProblem();
       startGameTimer();
     }
